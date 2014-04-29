@@ -31,7 +31,7 @@
 	</head>
 	<body onload = "setupHarps()" style = "background-color: #000000;">
 	
-			</br></br></br></br> <canvas id="canvas"></canvas>
+			</br></br></br> <canvas id="canvas"></canvas>
 		
 		<script>
 
@@ -69,10 +69,6 @@
 			var trainer = new LeapTrainer.Controller({controller: leapController});
 			trainer.fromJSON('{"name":"FUCK","pose":false,"data":[[{"x":0.12230706441185484,"y":-0.508974353846709,"z":0.3548294552822514,"stroke":1},{"x":-0.012236071241128021,"y":0.2656617665757899,"z":-0.019241596850127662,"stroke":1},{"x":0.023258727557572592,"y":0.005761124322826161,"z":0.07993090460846242,"stroke":1},{"x":0.06443501663240526,"y":-0.2890533300651934,"z":0.19961631680178615,"stroke":1},{"x":-0.07118313709074234,"y":0.49102564615329103,"z":-0.16256683258623772,"stroke":1},{"x":0.04116108589650393,"y":-0.2473138635563064,"z":0.1294375578387117,"stroke":1},{"x":0.01407076496365639,"y":-0.10847488884356427,"z":0.056173190798567196,"stroke":1},{"x":-0.06196950309368311,"y":0.33307659966073044,"z":-0.14686657434280403,"stroke":1},{"x":0.05805669224390868,"y":-0.47336642770084575,"z":0.1586419893844021,"stroke":1},{"x":-0.025494400162936415,"y":0.04938357555917605,"z":-0.06577638946664799,"stroke":1},{"x":-0.04516155536018968,"y":0.13121580517478992,"z":-0.12361398139819596,"stroke":1},{"x":-0.10724468475722214,"y":0.35105834656601675,"z":-0.46056404007016827,"stroke":1}]]}');	
 			leapController.connect();
-
-			trainer.on('FUCK', function(){
-				given();
-			});
 
 			function onSwipe(gesture){
 	    	  var startPos = leapToScene( gesture.startPosition );
@@ -132,7 +128,7 @@
 			       switch( type ){         
 			          case "circle":
 			          	console.log("circle!");
-			          	//onCircle(gesture);
+			          	onCircle(gesture);
 			            break;
 			  
 			          case "swipe":
@@ -146,10 +142,20 @@
 			            break;
 			        }
 			        readGesture = false;
-			        setTimeout(function() {readGesture = true;}, 1000);
+			        setTimeout(function() {readGesture = true;}, 2000);
 			      }}
 			});
 			leapController.connect();
+
+
+			var gave = true;
+			trainer.on('FUCK', function(){
+				if(gave) {
+				given();
+				gave = false;
+				setTimeout(function() {gave= true;}, 2000);
+				}
+			});
 
 
 		function setupHarps() {			
@@ -167,16 +173,16 @@
 
 		function getHarpers() {
 			//var num = Math.floor((Math.random() * 100) + 1);
-			chosen = (chosen+1) % 137;
-			chosenID = harray[chosen].id;
-			$("#give").html("Do you give a f*?");	
+			chosen = (chosen+1) % 100;
+			chosenID = harray[chosen].id;	
 			$("#randomNum").html(harray[chosen].attributes.number);
 			$("#numFact").html(harray[chosen].attributes.fact);
 		}
 
 		function given() {
 			getHarpers();
-			$("#give").html("Do you give a f*? Yeah");	
+			$("span").html("Yeah");
+			$("span").fadeIn(200);	
 			console.log(chosenID);
 			var query = new Parse.Query("HarpersIndex");
 				query.get(chosenID, {
@@ -188,12 +194,13 @@
 				  error: function(object, error) {
 				  }
 				});	
-			$("#give").html("Do you give a f*?");
+				$("span").fadeOut(200);
 		}
 
 		function notGiven() {
 			getHarpers();
-			$("#give").html("Do you give a f*? No");
+			$("span").html("No");
+			$("span").fadeIn(200);	
 			 console.log(chosenID);
 			 var query = new Parse.Query("HarpersIndex");
 				query.get(chosenID, {
@@ -205,16 +212,14 @@
 				  error: function(object, error) {
 				    // error is an instance of Parse.Error.
 				  }
-				});		
-				$("#give").html("Do you give a f*?");
+				});	
+				$("span").fadeOut(200);			
 		}
 
 		</script>
+			<h1 style = "color: #F2F2F2; font-family: 'Arvo'; position:absolute; left: 10%; padding-bottom: 30px"> Do you even care? <span style = "padding: 10px;"> </span></h1>
 
-		<h1 id = "give" style = "color: #F2F2F2; font-family: 'Arvo';"> Do you give a f*? </h1>
-		</br>
-		
-		<div style = "border-style: solid; border-color: #027073; background-color:rgba(0,0,0,0.7);" class = "large-8 small-8 large-centered small-centered columns">
+		<div style = "border-style: solid; border-color: #027073; background-color:rgba(0,0,0,0.7); margin-top: 100px" class = "large-8 small-8 large-centered small-centered columns">
 
 		</br></br>
 
@@ -226,7 +231,11 @@
 		<div class = "large-10 large-centered columns">	
 			<h4 style = "color: #04BEBF; font-family: 'Raleway'" id = "numFact"></h4>
 		</div>
+
 		</br></br>
+	</div>
+		
+		
 
 		<!--for
 		<div onclick = "given()"class = "button alert"> Yes </div>
