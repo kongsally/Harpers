@@ -1,0 +1,10 @@
+[submodule "AQGridView"]
+    path = AQGridView
+    url = https://github.com/AlanQuatermain/AQGridView.git
+
+[submodule "asi-http-request"]
+        path = asi-http-request
+        url = https://github.com/pokeb/asi-http-request.git
+[submodule "rack"]
+	path = rack
+	url = git://github.com/roboleary/LeapTrainer.js.git
