@@ -1,39 +1,4 @@
 
-<html>
-	<head>
-
-		<title>Harper's Index</title>
-
-	
-		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
-
-		<link rel="stylesheet" href="./css/foundation.css">
-	
-		<script src="jquery.js"></script>
-		<script src="http://js.leapmotion.com/0.2.0/leap.min.js"></script>
-		<script src="LeapTrainer.js/leaptrainer.min.js"></script>
-		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
-		<script type="text/javascript">
-  		 Parse.initialize("CRFWlKSimiwKjZetOXa47hlf5BWLD11xeuqru8uW", "KPeEEMRwGorAxZ8zILRaX4PvIfsOzCSUXsFpAXAk");
-  		 </script>
-
-		 <style>	
-			  #canvas{
-				  width:	100%;
-				  height:	100%;
-				  position: absolute;
-				  z-index: -1000;
-			  }
-		  </style>
-	</head>
-	<body onload = "setupHarps()" style = "background-color: #000000;">
-	
-			</br></br></br> <canvas id="canvas"></canvas>
-		
-		<script>
 
 		 	var canvas = document.getElementById( 'canvas' );
      		var c =  canvas.getContext( '2d' );
@@ -215,32 +180,3 @@
 				});	
 				$("span").fadeOut(200);			
 		}
-
-		</script>
-		<h1><a href = "about.html"><i style = "color:#F2F2F2; position:fixed; right: 10%"class="fi-info"></i></a></h1>
-			<h1 style = "color: #F2F2F2; font-family: 'Arvo'; position:absolute; left: 10%; padding-bottom: 30px"> Do you even care? <span style = "padding: 10px;"> </span></h1>
-
-		<div style = "border-style: solid; border-color: #027073; background-color:rgba(0,0,0,0.7); margin-top: 100px" class = "large-8 small-8 large-centered small-centered columns">
-
-		</br></br>
-
-		<div class = "large-12 small-12 large-centered columns">
-			<h1 style = "color: #05F2BC; font-family: 'Arvo';" id = "randomNum">?</h1>
-			</div>
- 
-		</br>
-		<div class = "large-10 large-centered columns">	
-			<h4 style = "color: #04BEBF; font-family: 'Raleway'" id = "numFact"></h4>
-		</div>
-
-		</br></br>
-	</div>
-		<!--for
-		<div onclick = "given()"class = "button alert"> Yes </div>
-		<div onclick = "notGiven()" class = "button alert" > No </div>
-
-	</br></br>
-
-		
-	</body>
-</html>

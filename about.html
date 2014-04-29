@@ -1,0 +1,71 @@
+
+<html>
+  <head>
+
+    <title>Harper's Index</title>
+
+  
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="./css/foundation.css">
+  
+    <script src="jquery.js"></script>
+    <script src="http://js.leapmotion.com/0.2.0/leap.min.js"></script>
+    <script src="LeapTrainer.js/leaptrainer.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    <script type="text/javascript">
+       Parse.initialize("CRFWlKSimiwKjZetOXa47hlf5BWLD11xeuqru8uW", "KPeEEMRwGorAxZ8zILRaX4PvIfsOzCSUXsFpAXAk");
+       </script>
+
+     <style>  
+        #canvas{
+          width:  100%;
+          height: 100%;
+          position: absolute;
+          z-index: -1000;
+        }
+      </style>
+  </head>
+  <body onload = "setupHarps()" style = "background-color: #000000;">
+  
+    <script>
+    var harray;
+    function setupHarps() {     
+      var query = new Parse.Query("HarpersIndex");
+        query.find({
+          success: function(results) {
+                harray = results;
+                display();
+          },
+          error: function(error) {
+              alert("Seems like Parse is having a problem");
+          }
+        });
+    }
+
+    function display() {
+        for(var i =0; i < 100; i++) {
+          var total = harray[i].attributes.Fucks + harray[i].attributes.Ignored;
+          console.log(total);
+          if(!isNaN(total)) {
+         
+          if( i == 0) {
+          $("#stuff").html("<div style =\"border-style: solid; border-color: #222222; background-color:rgba(0,0,0,0.7); margin-top: 100px\"class = 'large-6 large-centered columns'><h6 style = \"color: #04BEBF; font-family: 'Roboto'\">" + harray[i].attributes.fact+ " </h6></a>" + "<p style = \"color: #05F2BC; font-family: 'Roboto'\"> Yes: " + parseInt(100 * harray[i].attributes.Fucks/total) + "%  No: " + parseInt(100 * harray[i].attributes.Ignored/total) + "%</p></div>");
+          } else {
+            $("<div style =\"border-style: solid; border-color: #222222; background-color:rgba(0,0,0,0.7); \"class = 'large-6 large-centered columns'><h6 style = \"color: #04BEBF; font-family: 'Roboto'\">" + harray[i].attributes.fact+ " </h6></a>" + "<p style = \"color: #05F2BC; font-family: 'Roboto'\"> Yes: " + parseInt(100 * harray[i].attributes.Fucks/total) + "% No: " + parseInt(100 * harray[i].attributes.Ignored/total) + "%</p></div>").appendTo("#stuff");
+          }
+        }
+      }
+    }
+      </script>
+      <h1><a href = "index.html"><i style = "color:#F2F2F2; position:fixed; right: 10%"class="fi-home"></i></a></h1>
+    </br>
+      <h1 style = "color: #FFFFFF; font-family: 'Lato'"> Harpers Index 2014: Do people even care? </h1>
+      <div id = "stuff"></div>
+    </br></br>
+    
+  </body>
+</html>
